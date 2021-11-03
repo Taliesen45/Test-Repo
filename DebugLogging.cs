@@ -22,30 +22,5 @@ namespace CeDirScan
             CreateDebugLogger();
         }
         */
-
-        public static void CreateDebugLogger()
-        {
-            LogFilePath = @"..\Debug\Logs\";
-            LogFileName = $"{DateTime.Now:yyyyMMdd}_Log.txt";
-            LogFilePathAndName = Path.Combine(LogFilePath, LogFileName);
-
-            if (!Directory.Exists(LogFilePath))
-            {//TODO: --2-- need to fix this so that it doesn't check if a directory exist but it just makes it instead.
-                Directory.CreateDirectory(LogFilePath);
-            }//creates the log directory if it doesn't exist
-
-            if (!File.Exists(Path.GetFullPath(LogFilePathAndName)))
-            {
-                using (StreamWriter sw = File.CreateText(LogFilePathAndName)) { }//just creates and closes the file if it does not exist
-            }//creates the debug file for specific day the program is run
-        }
-
-        public static void LogActivity(string status)
-        {
-            using (StreamWriter streamWriter = File.AppendText(Path.GetFullPath(LogFilePathAndName)))
-            {
-                streamWriter.WriteLine($"{DateTime.Now:yyyy:MM:dd HH:mm:ss.ffff}, {status}");
-            }
-        }//writes to the debug logging file
     }
 }
